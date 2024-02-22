@@ -1,0 +1,5 @@
+qdrant-client
+git+https://github.com/ytdl-org/ytdl-nightly.git
+rich
+sentence_transformers
+openai

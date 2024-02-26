@@ -1,25 +1,17 @@
-from pathlib import Path
 import re
+from pathlib import Path
+from typing import Optional, Tuple, TypedDict
+
 from openai import OpenAI
-from logger import logger
-from typing import Tuple, TypedDict
-from sentence_transformers import SentenceTransformer
-from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams
+from qdrant_client import QdrantClient, models
 from qdrant_client.http.exceptions import UnexpectedResponse
-from qdrant_client import models
-from typing import Optional, Tuple
+from qdrant_client.models import Distance, VectorParams
+from sentence_transformers import SentenceTransformer
+
+from logger import logger
+from schemas import Document, DocumentMetadata
 
 COLLECTION_NAME = "embeddings"
-
-
-class DocumentMetadata(TypedDict):
-    video_id: str
-
-
-class Document(TypedDict):
-    page_content: str
-    metadata: DocumentMetadata
 
 
 def get_db(*args, **kwargs) -> QdrantClient:
@@ -111,6 +103,7 @@ def split_subtitles(
     )
     cleaned_text = re.sub(r"&nbsp;", " ", cleaned_text)
     cleaned_text = re.sub(r"\n+", "", cleaned_text).strip()
+    cleaned_text = re.sub(r"align:start position:0%", "", cleaned_text)
     sentences = cleaned_text.split(".")
     logger.info(f"sentences {len(cleaned_text)}")
     documents = []
@@ -139,7 +132,7 @@ def get_answer(
     documents = search(db, embeddings, question, video_id)
     context = "\n".join([document["page_content"] for document in documents])
     prompt = prompt.format(question=question, context=context)
-    logger.info(prompt)
+    # logger.info(prompt)
     chat_completion = model_client.chat.completions.create(
         messages=[
             {

@@ -8,8 +8,11 @@ from logger import logger
 from rag import DocumentMetadata, embed, get_answer
 from rag import get_db as get_vector_db
 from rag import get_model_client, split_subtitles
-from yt import (download_subtitles_from_video_url, get_id_from_video_url,
-                get_info_from_video_url)
+from yt import (
+    download_subtitles_from_video_url,
+    get_id_from_video_url,
+    get_info_from_video_url,
+)
 
 SUBTITLES_DIR = Path(".subtitles")
 SUBTITLES_DIR.mkdir(exist_ok=True, parents=True)
@@ -44,9 +47,9 @@ def main(video_url: str):
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument("-i", type=str, help="video url", required=True)
-    args = parser.parse_args()
-    video_url = args.i
-    # video_url = "https://www.youtube.com/watch?v=GyllRd2E6fg"
+    # parser = ArgumentParser()
+    # parser.add_argument("-i", type=str, help="video url", required=True)
+    # args = parser.parse_args()
+    # video_url = args.i
+    video_url = "https://www.youtube.com/watch\?v\=D5u7trVY5Ho"
     main(video_url)

@@ -117,7 +117,7 @@ def split_subtitles(
             document = Document(
                 page_content=document["page_content"][-overlap_size:], metadata=metadata
             )
-        document["page_content"] += sentence
+        document["page_content"] += " " + sentence
     return documents
 
 

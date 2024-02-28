@@ -47,9 +47,9 @@ def main(video_url: str):
 
 
 if __name__ == "__main__":
-    # parser = ArgumentParser()
-    # parser.add_argument("-i", type=str, help="video url", required=True)
-    # args = parser.parse_args()
-    # video_url = args.i
-    video_url = "https://www.youtube.com/watch\?v\=D5u7trVY5Ho"
+    parser = ArgumentParser()
+    parser.add_argument("-i", type=str, help="video url", required=True)
+    args = parser.parse_args()
+    video_url = args.i
+    # video_url = "https://www.youtube.com/watch\?v\=D5u7trVY5Ho"
     main(video_url)

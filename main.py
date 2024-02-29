@@ -39,6 +39,8 @@ def main(video_url: str):
         save_video_to_db({"id": video_id, **video_info}, db)
         logger.info(f"[{video_id}] Updating DB ... ")
     logger.info(f"[{video_id}] Done!")
+    video = get_video_from_db(video_id, db)
+    print(f"Ask me question about \"{video['title']}\"")
     while question := input(">"):
         answer, sources = get_answer(
             vector_db, embeddings, model_client, question, video_id

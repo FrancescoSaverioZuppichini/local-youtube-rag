@@ -11,4 +11,4 @@ services:
       - 6334
       - 6335
     volumes:
-      - ./qdrant_data:/qdrant_data
+      - ./data/qdrant_storage:/qdrant/storage

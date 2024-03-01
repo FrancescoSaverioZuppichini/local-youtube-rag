@@ -20,7 +20,7 @@ docker-compose up -d
 ```
 
 ```bash
-ollama run mistralbash oo
+ollama run mistral
 ```
 
 ```bash
